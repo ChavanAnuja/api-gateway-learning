@@ -10,8 +10,31 @@ on:
       - main
 
 jobs:
-  pre-commit:scans:
+  pre-commit-scans:
         runs-on: ubuntu-latest
 
         steps:
-          - name: 
+          - name: Setup java
+            uses: actions/setup-java@v4
+            with:
+              distribution: 'temurin' # See 'Supported distributions' for available options
+              java-version: '21'
+               
+          - name: Checkout Code
+            uses: actions/checkout@v4
+
+          - name: Gitleaks Scan
+            uses: actions/checkout@v4
+            with:
+              args: -paths.
+
+          - name: Checkout Code
+            uses: actions/checkout@v1
+
+          - name: OWASP Scan
+            uses: zaproxy/action-full-scan@v0.10.0
+            continue-on-error: true
+            
+          - name: Build Code and create docker image
+            run: mvn clean install docker:build
+              
