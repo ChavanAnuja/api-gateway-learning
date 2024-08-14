@@ -1,0 +1,17 @@
+name: Learn basics of GitHub Actions
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  pre-commit:scans:
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: 
