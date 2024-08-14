@@ -44,6 +44,9 @@ jobs:
               username: ${{secrets.DOCKER_REGISTRY_USER}}
               password: ${{secrets.DOCKER_REGISTRY_PAT}}
 
+          - name: Tag Docker Image
+            run: docker tag api-gateway:latest anujachavan/api-gateway:latest
+            
           - name: Push Docker Image
             run: docker push anujachavan/api-gateway:latest
 
